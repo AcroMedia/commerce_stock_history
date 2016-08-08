@@ -2,3 +2,4 @@ name = Commerce Stock History
 
 dependencies[] = commerce_stock
 dependencies[] = entity_api
+dependencies[] = commerce_product_ui
