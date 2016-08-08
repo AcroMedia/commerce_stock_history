@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Hooks and utility functions for Commerce Stock History.
+ */
+
+/**
+ * Implements hook_entity_info().
+ */
+function commerce_stock_history_entity_info() {
+  $info = array();
+
+  $info['commerce_stock_history'] = array(
+    'label' => t('Stock history'),
+    'base table' => 'commerce_stock_history',
+    'entity keys' => array(
+      'id' => 'id',
+      'label' => 'message',
+    ),
+    'module' => 'commerce_stock_history',
+    'entity class' => 'Entity',
+    'controller class' => 'EntityAPIController',
+  );
+
+  return $info;
+}

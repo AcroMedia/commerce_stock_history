@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * @file
+ * Tests for Commerce Stock History.
+ */
+
+class CommerceStockHistoryBaseTestCase extends CommerceBaseTestCase {
+
+  /**
+   * @TODO:
+   * Write tests for:
+   *   Viewing the stock history tab (permissions, etc.)
+   *   History creation programmatically
+   *   History creation on checkout (maybe put into SS rules module?)
+   */
+
+  /**
+   * @{inheritDoc}
+   */
+  public function getInfo() {
+    return array(
+      'name' => t('Commerce stock history'),
+      'description' => t('Tests base functionality for the Commerce Stock History.'),
+      'group' => t('Commerce Stock History'),
+    );
+  }
+
+  /**
+   * @{inheritDoc}
+   */
+  public function setUp() {
+
+  }
+
+  /**
+   * Tests user access to the stock history page.
+   */
+  public function testStockHistoryTab() {
+    $dummy_product = $this->createDummyProduct($this->randomName(), $this->randomName(), 5000);
+    $this->drupalGet('admin/commerce/products/' . $dummy_product->product_id .'/stock-history');
+    $this->assertResponse(200, 'Privileged user should be able to access the stock history tab.');
+  }
+
+  /**
+   * Tests the creation of stock history entities and the viewing of them.
+   */
+  public function testStockHistoryCreation() {
+
+  }
+
+  /**
+   * Tests the creation of stock history during checkout.
+   */
+}

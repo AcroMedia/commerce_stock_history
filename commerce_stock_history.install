@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * @file
+ * Schema definitions and installation hooks for Commerce Stock History.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function commerce_stock_history_schema() {
+  $schema['commerce_stock_history'] = array(
+    'description' => 'The base table for commerce stock history entities',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'message' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'product_id' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'quantity' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'uid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'history_uid' => array('uid'),
+      'history_created' => array('created'),
+      'history_quantity' => array('quantity'),
+      'history_product_id' => array('product_id'),
+    ),
+  );
+
+  return $schema;
+}
