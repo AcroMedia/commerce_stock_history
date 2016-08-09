@@ -32,6 +32,16 @@ function commerce_stock_history_permission() {
 }
 
 /**
+ * Implements hook_views_api().
+ */
+function commerce_stock_history_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'commerce_stock_history') . '/includes/views',
+  );
+}
+
+/**
  * Implements hook_entity_info().
  */
 function commerce_stock_history_entity_info() {
@@ -53,48 +63,3 @@ function commerce_stock_history_entity_info() {
   return $info;
 }
 
-/**
- * Implements hook_entity_property_info().
- */
-function commerce_stock_history_entity_property_info() {
-  $info = array();
-  $properties = &$info['node']['properties'];
-
-  $properties['id'] = array(
-    'label' => t('Stock history ID'),
-    'description' => t('The unique ID for the stock history entry.'),
-    'type' => 'integer',
-  );
-
-  $properties['message'] = array(
-    'label' => t('Stock history message'),
-    'description' => t('The stock history message.'),
-    'type' => 'text',
-  );
-
-  $properties['product_id'] = array(
-    'label' => t('Stock history product ID'),
-    'description' => t('The ID of the product that the stock adjustment was made on.'),
-    'type' => 'integer',
-  );
-
-  $properties['quantity'] = array(
-    'label' => t('Stock history quantity'),
-    'description' => t("The amount that the product's stock as adjusted by."),
-    'type' => 'integer',
-  );
-
-  $properties['uid'] = array(
-    'label' => t('Stock history user'),
-    'description' => t('The ID of the user who created the stock history entity.'),
-    'type' => 'integer',
-  );
-
-  $properties['created'] = array(
-    'label' => t('Stock history creation'),
-    'description' => t('The time that the stock history entity was created.'),
-    'type' => 'integer',
-  );
-
-  return $info;
-}
