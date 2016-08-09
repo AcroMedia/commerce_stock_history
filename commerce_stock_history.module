@@ -63,3 +63,36 @@ function commerce_stock_history_entity_info() {
   return $info;
 }
 
+/**
+ * Implements hook_entity_property_info_alter().
+ */
+function commerce_stock_history_entity_property_info_alter(&$info) {
+  foreach ($info['commerce_stock_history']['properties'] as $field => &$info) {
+    $info['setter callback'] = 'entity_property_verbatim_set';
+  }
+}
+
+/**
+ * Creates a new stock history entity.
+ *
+ * @param string $message
+ *   The entry's message.
+ * @param object $product
+ *   The product the entry is for.
+ * @param int $quantity
+ *   The quantity the stock is being adjusted by.
+ * @param int $uid
+ *   The ID of the user making the stock adjustment.
+ *
+ * @return bool
+ */
+function commerce_stock_history_create_entry($message, $product, $quantity, $uid) {
+  $stock_history_entry = entity_create('commerce_stock_history', array(
+    'message' => $message,
+    'product_id' => $product->product_id,
+    'quantity' => $quantity,
+    'uid' => $uid,
+  ));
+  entity_save('commerce_stock_history', $stock_history_entry);
+  return $stock_history_entry;
+}
